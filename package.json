@@ -1,0 +1,28 @@
+{
+  "name": "sensor-sensibility",
+  "version": "0.0.1",
+  "main": "index.js",
+  "author": "Samuel Chalela <samuel.chalela@thoughtworks.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "next"
+  },
+  "dependencies": {
+    "google-maps-react": "^2.0.2",
+    "next": "^8.1.0",
+    "pubnub": "^4.24.0",
+    "react": "^16.8.6",
+    "react-d3-speedometer": "^0.5.5",
+    "react-dom": "^16.8.6",
+    "rxjs": "^6.5.2",
+    "styled-components": "^4.2.0"
+  },
+  "devDependencies": {
+    "semistandard": "^13.0.1",
+    "@babel/core": "^7.4.3",
+    "babel-jest": "^24.7.1",
+    "babel-plugin-styled-components": "^1.10.0",
+    "jest": "^24.7.1",
+    "react-testing-library": "^6.0.4"
+  }
+}
