@@ -5,10 +5,12 @@
   "author": "Samuel Chalela <samuel.chalela@thoughtworks.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "next"
+    "dev": "next",
+    "test": "jest"
   },
   "dependencies": {
     "google-maps-react": "^2.0.2",
+    "lodash.get": "^4.4.2",
     "next": "^8.1.0",
     "pubnub": "^4.24.0",
     "react": "^16.8.6",
@@ -18,11 +20,11 @@
     "styled-components": "^4.2.0"
   },
   "devDependencies": {
-    "semistandard": "^13.0.1",
     "@babel/core": "^7.4.3",
     "babel-jest": "^24.7.1",
     "babel-plugin-styled-components": "^1.10.0",
     "jest": "^24.7.1",
-    "react-testing-library": "^6.0.4"
+    "react-testing-library": "^6.0.4",
+    "semistandard": "^13.0.1"
   }
 }
