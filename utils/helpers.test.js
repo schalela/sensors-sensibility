@@ -1,4 +1,4 @@
-import { getGroupAverages, divideValuesBy, mergeGroupResults, filterCriteriaForGroup, addObjects } from './helpers';
+import { getGroupAverages, divideValuesBy, mergeGroupResults, filterUsingRegex, addObjects } from './helpers';
 
 describe('getGroupAverages', () => {
   it('should return averages for a collection of raw sensor data records', () => {
@@ -46,6 +46,20 @@ describe('divideValuesBy', () => {
       bar: 50,
       bananas: 100
     };
+
+    const result = divideValuesBy(numOfRecords)(groupTotals);
+    expect(result).toEqual(expectedResult);
+  });
+
+  it('should return an empty object if the number of records is 0', () => {
+    const numOfRecords = 0;
+    const groupTotals = {
+      foo: 100,
+      bar: 500,
+      bananas: 1000
+    };
+
+    const expectedResult = {};
 
     const result = divideValuesBy(numOfRecords)(groupTotals);
     expect(result).toEqual(expectedResult);
@@ -122,28 +136,28 @@ describe('filterCriteriaForGroup', () => {
   it('should return true if the message sensor_uuid matches the group regex for a numeric group', () => {
     const message = { sensor_uuid: 'probe-0FOO' };
 
-    const result = filterCriteriaForGroup(groupsMetadata[0].regex)(message);
+    const result = filterUsingRegex(groupsMetadata[0].regex)(message);
     expect(result).toBe(true);
   });
 
   it('should return true if the message sensor_uuid matches the group regex for a non-numeric group prefix', () => {
     const message = { sensor_uuid: 'probe-kBAR' };
 
-    const result = filterCriteriaForGroup(groupsMetadata[1].regex)(message);
+    const result = filterUsingRegex(groupsMetadata[1].regex)(message);
     expect(result).toBe(true);
   });
 
   it('should return false if the message sensor_uuid does not match the group regex for a numeric group prefix', () => {
     const message = { sensor_uuid: 'probe-kBAR' };
 
-    const result = filterCriteriaForGroup(groupsMetadata[0].regex)(message);
+    const result = filterUsingRegex(groupsMetadata[0].regex)(message);
     expect(result).toBe(false);
   });
 
   it('should return false if the message sensor_uuid does not match the group regex for a non-numeric group prefix', () => {
     const message = { sensor_uuid: 'probe-0FOO' };
 
-    const result = filterCriteriaForGroup(groupsMetadata[1].regex)(message);
+    const result = filterUsingRegex(groupsMetadata[1].regex)(message);
     expect(result).toBe(false);
   });
 });
@@ -177,5 +191,20 @@ describe('addObjects', () => {
 
     const result = addObjects(obj1, obj2);
     expect(result).toEqual({ foo: 8, bar: 10 });
+  });
+
+  it('should add only the values of the same properties of an object if the properties are different', () => {
+    const obj1 = {
+      foo: '3',
+      bar: 8
+    };
+
+    const obj2 = {
+      foo: 5,
+      zoo: '2'
+    };
+
+    const result = addObjects(obj1, obj2);
+    expect(result).toEqual({ foo: 8 });
   });
 });

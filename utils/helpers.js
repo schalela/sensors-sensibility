@@ -8,11 +8,11 @@ export const getGroupAverages = groupData => {
   }, {});
 };
 
-export const divideValuesBy = totalRecords => values =>
-  Object.keys(values).reduce((acc, key) => {
+export const divideValuesBy = totalRecords => values => totalRecords > 0
+  ? Object.keys(values).reduce((acc, key) => {
     acc[key] = values[key] / totalRecords;
     return acc;
-  }, {});
+  }, {}) : {};
 
 export const mergeGroupResults = (groupData, groupIndex, groupsMetadata) => {
   const totals = getGroupAverages(groupData);
@@ -22,7 +22,7 @@ export const mergeGroupResults = (groupData, groupIndex, groupsMetadata) => {
   };
 };
 
-export const filterCriteriaForGroup = regex => message => regex.test(message.sensor_uuid);
+export const filterUsingRegex = regex => message => regex.test(message.sensor_uuid);
 
 export const addObjects = (obj1, obj2) => {
   let sum = {};
