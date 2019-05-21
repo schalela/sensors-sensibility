@@ -9,7 +9,7 @@ const Logo = styled.img`
 `;
 
 const Github = () => (
-  <Logo onClick={() => { window.location = 'google.com'; }} src={'/static/github.png'} />
+  <Logo onClick={() => { window.location = 'https://github.com/schalela/sensors-sensibility'; }} src={'/static/github.png'} />
 );
 
 export default Github;

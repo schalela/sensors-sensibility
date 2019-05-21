@@ -24,6 +24,8 @@ const MapContainer = ({ google, sensorData = [] }) => {
   const [mapHeight, setMapHeight] = useState('70%');
   const { groupIndex } = selectedMarker;
 
+  const getValueFor = sensorType => Math.round(get(sensorData, `[${groupIndex}].totals.${sensorType}`, 0));
+
   useEffect(() => {
     if (process.browser && window.innerWidth < 400) {
       setMapHeight('45%');
@@ -45,7 +47,7 @@ const MapContainer = ({ google, sensorData = [] }) => {
       zoom={3}>
       {sensorData.map(({ metadata: { name, position } }, groupIndex) => (
         <Marker
-          data-testid={`marker-${groupIndex}`}
+          key={`marker-${groupIndex}`}
           icon={'/static/sensor.png'}
           onClick={({ name }, marker) => setSelectedMarker({ marker, name, groupIndex })}
           name={name}
@@ -59,19 +61,19 @@ const MapContainer = ({ google, sensorData = [] }) => {
           <GroupTitle>{selectedMarker.name}</GroupTitle>
           <SensorInfo>
             <SensorLogo src={'/static/ambient_temperature.png'} />
-            {Math.round(get(sensorData, `[${groupIndex}].totals.ambient_temperature`, 0))} C
+            {getValueFor('ambient_temperature')} C
           </SensorInfo>
           <SensorInfo>
             <SensorLogo src={'/static/humidity.png'} />
-            {Math.round(get(sensorData, `[${groupIndex}].totals.humidity`, 0))} %
+            {getValueFor('humidity')} %
           </SensorInfo>
           <SensorInfo>
             <SensorLogo src={'/static/radiation_level.png'} />
-            {Math.round(get(sensorData, `[${groupIndex}].totals.radiation_level`, 0))} millirads/hour
+            {getValueFor('radiation_level')} millirads/hour
           </SensorInfo>
           <SensorInfo>
             <SensorLogo src={'/static/photosensor.png'} />
-            {Math.round(get(sensorData, `[${groupIndex}].totals.photosensor`, 0))} w/m2
+            {getValueFor('photosensor')} w/m2
           </SensorInfo>
         </>
       </InfoWindow>
