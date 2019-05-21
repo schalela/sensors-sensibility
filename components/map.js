@@ -44,7 +44,7 @@ const MapContainer = ({ google, sensorData = [] }) => {
         lng: 133
       }}
       google={google}
-      zoom={3}>
+      zoom={4}>
       {sensorData.map(({ metadata: { name, position } }, groupIndex) => (
         <Marker
           key={`marker-${groupIndex}`}
