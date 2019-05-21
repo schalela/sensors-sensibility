@@ -26,27 +26,27 @@ export default () => {
           startColor={'green'}
           endColor={'red'}
           maxValue={50}
-          value={allGroupsAvg.ambient_temperature}
+          value={Math.round(allGroupsAvg.ambient_temperature)}
           height={'150px'} />
         <Gauge
           icon={'/static/humidity.png'}
           startColor={'#ffdb68'}
           endColor={'#003c75'}
           maxValue={100}
-          value={allGroupsAvg.humidity}
+          value={Math.round(allGroupsAvg.humidity)}
           height={'150px'} />
         <Gauge
           icon={'/static/radiation_level.png'}
           startColor={'green'}
           endColor={'red'}
           maxValue={400}
-          value={allGroupsAvg.radiation_level} />
+          value={Math.round(allGroupsAvg.radiation_level)} />
         <Gauge
           icon={'/static/photosensor.png'}
           startColor={'black'}
           endColor={'white'}
           maxValue={1000}
-          value={allGroupsAvg.photosensor} />
+          value={Math.round(allGroupsAvg.photosensor)} />
       </Totals>
     </>
   );

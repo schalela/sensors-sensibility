@@ -65,7 +65,7 @@ export default (groupsMetadata, sensorDataStream, rollingWindow = 100) => {
     for (let groupIndex = 0; groupIndex < totalGroups; groupIndex++) {
       dataStream.current.subscribe(updateDataForGroup(groupIndex));
     }
-  });
+  }, []);
 
   const sensorResults = sensorsData.map(buildGroupResults);
 

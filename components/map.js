@@ -59,19 +59,19 @@ const MapContainer = ({ google, sensorData = [] }) => {
           <GroupTitle>{selectedMarker.name}</GroupTitle>
           <SensorInfo>
             <SensorLogo src={'/static/ambient_temperature.png'} />
-            {get(sensorData, `[${groupIndex}].totals.ambient_temperature`, '-')}
+            {Math.round(get(sensorData, `[${groupIndex}].totals.ambient_temperature`, 0))} C
           </SensorInfo>
           <SensorInfo>
             <SensorLogo src={'/static/humidity.png'} />
-            {get(sensorData, `[${groupIndex}].totals.humidity`, '-')}
+            {Math.round(get(sensorData, `[${groupIndex}].totals.humidity`, 0))} %
           </SensorInfo>
           <SensorInfo>
             <SensorLogo src={'/static/radiation_level.png'} />
-            {get(sensorData, `[${groupIndex}].totals.radiation_level`, '-')}
+            {Math.round(get(sensorData, `[${groupIndex}].totals.radiation_level`, 0))} millirads/hour
           </SensorInfo>
           <SensorInfo>
             <SensorLogo src={'/static/photosensor.png'} />
-            {get(sensorData, `[${groupIndex}].totals.photosensor`, '-')}
+            {Math.round(get(sensorData, `[${groupIndex}].totals.photosensor`, 0))} w/m2
           </SensorInfo>
         </>
       </InfoWindow>
