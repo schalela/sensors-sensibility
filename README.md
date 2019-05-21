@@ -1,6 +1,7 @@
 # [SHOKUNIN 2019] May Challenge: Sensor Sensibility
 
 [![js-semistandard-style](https://img.shields.io/badge/code%20style-semistandard-brightgreen.svg?style=flat-square)](https://github.com/Flet/semistandard)
+[![CircleCI](https://circleci.com/gh/schalela/sensors-sensibility.svg?style=svg)](https://circleci.com/gh/schalela/sensors-sensibility)
 
 The May TW Shokunin challenge is to read the sensor data from the stream and create visualisations of the rolling average for each of the:
 

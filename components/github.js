@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const Logo = styled.img`
   position: fixed;
   top: 0;
-  right: 0;
+  right: 10px;
   cursor: pointer;
 `;
 
