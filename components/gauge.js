@@ -1,28 +1,24 @@
 import React from 'react';
-import styled from 'styled-components';
 import ReactSpeedometer from 'react-d3-speedometer';
 
-const Wrapper = styled.div`
-  height: ${props => props.height || 'auto'};
-`;
-
-const Gauge = ({ value, startColor, endColor, maxValue, height, icon }) => {
+const Gauge = ({ value, maxValue, icon }) => {
   return (
-    <Wrapper height={height}>
+    <>
       <img src={icon} />
       <ReactSpeedometer
         segments={25}
         maxSegmentLabels={5}
-        startColor={startColor}
-        endColor={endColor}
-        needleColor={'#380100'}
+        startColor={'black'}
+        endColor={'white'}
         maxValue={maxValue}
-        width={150}
-        height={150}
-        ringWidth={20}
+        needleColor={'white'}
+        width={100}
+        height={100}
+        needleHeightRatio={0.7}
+        ringWidth={12}
         value={value}
       />
-    </Wrapper>
+    </>
   );
 };
 

@@ -1,44 +1,47 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Map, Marker, InfoWindow, GoogleApiWrapper } from 'google-maps-react';
 import get from 'lodash.get';
 
+import mapStyles from './map-style';
+
 const GroupTitle = styled.div`
   font-family: sans-serif;
   font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 20px;
 `;
 
 const SensorInfo = styled.div`
   display: flex;
   align-items: center;
+  margin: 5px;
 `;
 
 const SensorLogo = styled.img`
   width: 20px;
   height: 20px;
-  margin-right: 5px;
+  margin-right: 10px;
 `;
 
-const MapContainer = ({ google, sensorData = [] }) => {
+const InfoWrapper = styled.div`
+  background: grey;
+  color: white;
+  padding: 15px;
+  border-radius: 5px;
+`;
+
+const MapContainer = ({ google, sensorData = [], children }) => {
   const [selectedMarker, setSelectedMarker] = useState('');
-  const [mapHeight, setMapHeight] = useState('70%');
   const { groupIndex } = selectedMarker;
 
   const getValueFor = sensorType => Math.round(get(sensorData, `[${groupIndex}].totals.${sensorType}`, 0));
 
-  useEffect(() => {
-    if (process.browser && window.innerWidth < 400) {
-      setMapHeight('45%');
-    }
-  }, []);
-
   return (
     <Map
-      style={{
-        marginTop: 12,
-        width: '98%',
-        height: mapHeight
-      }}
+      styles={mapStyles}
+      mapTypeControl={false}
+      streetViewControl={false}
       initialCenter={{
         lat: -23,
         lng: 133
@@ -57,7 +60,7 @@ const MapContainer = ({ google, sensorData = [] }) => {
       <InfoWindow
         marker={selectedMarker.marker}
         visible={!!selectedMarker}>
-        <>
+        <InfoWrapper>
           <GroupTitle>{selectedMarker.name}</GroupTitle>
           <SensorInfo>
             <SensorLogo src={'/static/ambient_temperature.png'} />
@@ -75,8 +78,9 @@ const MapContainer = ({ google, sensorData = [] }) => {
             <SensorLogo src={'/static/photosensor.png'} />
             {getValueFor('photosensor')} w/m2
           </SensorInfo>
-        </>
+        </InfoWrapper>
       </InfoWindow>
+      {children}
     </Map>
   );
 };
