@@ -12,8 +12,8 @@ const Gauge = ({ value, maxValue, icon }) => {
         endColor={'white'}
         maxValue={maxValue}
         needleColor={'white'}
-        width={100}
-        height={100}
+        width={110}
+        height={110}
         needleHeightRatio={0.7}
         ringWidth={12}
         value={value}

@@ -18,9 +18,11 @@ const GlobalStyle = createGlobalStyle`
   }
   .segment-value {
     font-size: 10px !important;
+    font-family: sans-serif;
     fill: white !important;
   }
   .current-value {
+    font-family: sans-serif;
     fill: white !important;
   }
 `;
