@@ -20,7 +20,7 @@ export default (groupsMetadata, sensorsDataStream, rollingWindow = 50) => {
   const buildGroupResults = (groupData, groupIndex) => mergeGroupResults(groupData, groupIndex, groupsMetadata);
   const totalsReducer = (result, { totals }) => addObjects(result, totals);
 
-  const addRecordToDataArray = (groupNumber) => sensorRecord => {
+  const addRecordToDataArray = groupNumber => sensorRecord => {
     const newGroupData = sensorsData[groupNumber].slice(0);
     newGroupData.push(sensorRecord);
 
@@ -65,7 +65,8 @@ export default (groupsMetadata, sensorsDataStream, rollingWindow = 50) => {
   }, []);
 
   const sensorResults = sensorsData.map(buildGroupResults);
-  const allGroupsAvg = calculateAveragesFor(sensorResults.reduce(totalsReducer, initialResults));
+  const totalResults = sensorResults.reduce(totalsReducer, initialResults);
+  const allGroupsAvg = calculateAveragesFor(totalResults);
 
   return [sensorResults, allGroupsAvg, totalProcessed];
 };
