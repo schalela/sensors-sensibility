@@ -1,34 +1,15 @@
 import React from 'react';
-import PubNub from 'pubnub';
-import { createGlobalStyle } from 'styled-components';
 
 import Map from '../components/map';
 import Gauge from '../components/gauge';
 import Totals from '../components/totals';
+import GlobalStyle from '../global-style.js';
 import { groupsMetadata } from '../utils/metadata';
 import useSensorsData from '../hooks/useSensorsData';
-
-const sensorDataStream = new PubNub({
-  subscribeKey: 'sub-c-5f1b7c8e-fbee-11e3-aa40-02ee2ddab7fe'
-});
-
-const GlobalStyle = createGlobalStyle`
-  body {
-    margin: 0;
-  }
-  .segment-value {
-    font-size: 10px !important;
-    font-family: sans-serif;
-    fill: white !important;
-  }
-  .current-value {
-    font-family: sans-serif;
-    fill: white !important;
-  }
-`;
+import sensorsDataStream from '../data/sensors-data';
 
 export default () => {
-  const [sensorResults, allGroupsAvg] = useSensorsData(groupsMetadata, sensorDataStream);
+  const [sensorResults, allGroupsAvg] = useSensorsData(groupsMetadata, sensorsDataStream);
 
   return (
     <>
@@ -38,19 +19,19 @@ export default () => {
           <Gauge
             icon={'/static/ambient_temperature.png'}
             maxValue={50}
-            value={Math.round(allGroupsAvg.ambient_temperature)} />
+            value={Number(allGroupsAvg.ambient_temperature.toFixed(1))} />
           <Gauge
             icon={'/static/humidity.png'}
             maxValue={100}
-            value={Math.round(allGroupsAvg.humidity)} />
+            value={Number(allGroupsAvg.humidity.toFixed(1))} />
           <Gauge
             icon={'/static/radiation_level.png'}
             maxValue={400}
-            value={Math.round(allGroupsAvg.radiation_level)} />
+            value={Number(allGroupsAvg.radiation_level.toFixed(1))} />
           <Gauge
             icon={'/static/photosensor.png'}
             maxValue={1000}
-            value={Math.round(allGroupsAvg.photosensor)} />
+            value={Number(allGroupsAvg.photosensor.toFixed(1))} />
         </Totals>
       </Map>
     </>

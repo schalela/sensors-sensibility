@@ -35,7 +35,7 @@ const MapContainer = ({ google, sensorData = [], children }) => {
   const [selectedMarker, setSelectedMarker] = useState('');
   const { groupIndex } = selectedMarker;
 
-  const getValueFor = sensorType => Math.round(get(sensorData, `[${groupIndex}].totals.${sensorType}`, 0));
+  const getValueFor = sensorType => get(sensorData, `[${groupIndex}].totals.${sensorType}`, 0).toFixed(1);
 
   return (
     <Map

@@ -11,7 +11,7 @@ import {
 
 const initialResults = { ambient_temperature: 0, humidity: 0, radiation_level: 0, photosensor: 0 };
 
-export default (groupsMetadata, sensorDataStream, rollingWindow = 50) => {
+export default (groupsMetadata, sensorsDataStream, rollingWindow = 50) => {
   const dataStream = useRef(null);
   const [sensorsData, setSensorsData] = useState(Array(groupsMetadata.length).fill([]));
   const [totalProcessed, setTotalProcessed] = useState(0);
@@ -23,6 +23,7 @@ export default (groupsMetadata, sensorDataStream, rollingWindow = 50) => {
   const addRecordToDataArray = (groupNumber) => sensorRecord => {
     const newGroupData = sensorsData[groupNumber].slice(0);
     newGroupData.push(sensorRecord);
+
     setSensorsData(currentState => {
       currentState[groupNumber] = newGroupData;
       if (currentState[groupNumber].length > rollingWindow) {
@@ -45,20 +46,16 @@ export default (groupsMetadata, sensorDataStream, rollingWindow = 50) => {
   };
 
   useEffect(() => {
-    if (dataStream.current) {
-      return;
-    }
-
     dataStream.current = new Subject();
 
-    sensorDataStream.addListener({
+    sensorsDataStream.addListener({
       message: ({ message }) => {
         setTotalProcessed(currentState => currentState + 1);
         dataStream.current.next(message);
       }
     });
 
-    sensorDataStream.subscribe({
+    sensorsDataStream.subscribe({
       channels: ['pubnub-sensor-network']
     });
 
@@ -68,8 +65,7 @@ export default (groupsMetadata, sensorDataStream, rollingWindow = 50) => {
   }, []);
 
   const sensorResults = sensorsData.map(buildGroupResults);
-  const allGroupsTotals = sensorResults.reduce(totalsReducer, initialResults);
-  const allGroupsAvg = calculateAveragesFor(allGroupsTotals);
+  const allGroupsAvg = calculateAveragesFor(sensorResults.reduce(totalsReducer, initialResults));
 
   return [sensorResults, allGroupsAvg, totalProcessed];
 };
