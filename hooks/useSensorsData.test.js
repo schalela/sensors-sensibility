@@ -3,10 +3,10 @@ import useSensorsData from './useSensorsData';
 
 class MockedPubSub {
   constructor() {
-    this.listeners = {};
+    this.listeners = null;
   }
 
-  addListener = (listener) => {
+  init = (listener) => {
     this.listeners = listener;
   }
 

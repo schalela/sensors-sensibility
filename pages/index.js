@@ -4,7 +4,7 @@ import Map from '../components/map';
 import Gauge from '../components/gauge';
 import Totals from '../components/totals';
 import GlobalStyle from '../global-style.js';
-import { groupsMetadata } from '../utils/metadata';
+import groupsMetadata from '../data/metadata';
 import useSensorsData from '../hooks/useSensorsData';
 import sensorsDataStream from '../data/sensors-data';
 

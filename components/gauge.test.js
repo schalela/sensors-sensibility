@@ -12,16 +12,4 @@ describe('Gauge', () => {
     />);
     expect(container).toMatchSnapshot();
   });
-
-  it('should render with defined height', () => {
-    const container = render(<Gauge
-      icon={'/static/ambient_temperature.png'}
-      startColor={'green'}
-      endColor={'red'}
-      maxValue={50}
-      value={10}
-      height={'150px'}
-    />);
-    expect(container).toMatchSnapshot();
-  });
 });

@@ -1,4 +1,4 @@
-export const groupsMetadata = [
+export default [
   {
     name: 'Group 0',
     position: { lat: -16.876261, lng: 145.753509 },
