@@ -39,6 +39,7 @@ yarn test
 ## Built With
 
 * [Next.js](https://nextjs.org/) - The React Framework
+* [Styled Components](https://www.styled-components.com/) - Visual primitives for the component age
 * [RxJS](https://rxjs-dev.firebaseapp.com/) - Reactive Extensions Library for JavaScript
 * [Jest](https://jestjs.io/) - Delightful JavaScript Testing
 

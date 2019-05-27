@@ -1,6 +1,6 @@
 {
   "name": "sensor-sensibility",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "main": "index.js",
   "author": "Samuel Chalela <samuel.chalela@thoughtworks.com>",
   "license": "MIT",
@@ -9,7 +9,7 @@
     "build": "next build",
     "now-build": "next build && next export -o dist",
     "start": "next start",
-    "test": "jest"
+    "test": "jest --coverage"
   },
   "dependencies": {
     "google-maps-react": "^2.0.2",
