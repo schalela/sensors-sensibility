@@ -4,6 +4,7 @@ import { Map, Marker, InfoWindow, GoogleApiWrapper } from 'google-maps-react';
 import get from 'lodash.get';
 
 import mapStyles from './map-style';
+import sensorTypes from '../../data/sensor-types';
 
 const GroupTitle = styled.div`
   font-family: sans-serif;
@@ -62,22 +63,12 @@ const MapContainer = ({ google, sensorData = [], children }) => {
         visible={!!selectedMarker}>
         <InfoWrapper>
           <GroupTitle>{selectedMarker.name}</GroupTitle>
-          <SensorInfo>
-            <SensorLogo src={'/static/ambient_temperature.png'} />
-            {getValueFor('ambient_temperature')} C
-          </SensorInfo>
-          <SensorInfo>
-            <SensorLogo src={'/static/humidity.png'} />
-            {getValueFor('humidity')} %
-          </SensorInfo>
-          <SensorInfo>
-            <SensorLogo src={'/static/radiation_level.png'} />
-            {getValueFor('radiation_level')} millirads/hour
-          </SensorInfo>
-          <SensorInfo>
-            <SensorLogo src={'/static/photosensor.png'} />
-            {getValueFor('photosensor')} w/m2
-          </SensorInfo>
+          {sensorTypes.map((sensor, i) => (
+            <SensorInfo key={i}>
+              <SensorLogo src={`/static/${sensor.value}.png`} />
+              {getValueFor(sensor.value)} {sensor.units}
+            </SensorInfo>
+          ))}
         </InfoWrapper>
       </InfoWindow>
       {children}

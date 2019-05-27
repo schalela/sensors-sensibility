@@ -30,9 +30,7 @@ export default (groupsMetadata, sensorsDataStream, rollingWindow = 50) => {
 
   useEffect(() => {
     dataStream.current = new Subject();
-    for (let groupIndex = 0; groupIndex < groupsMetadata.length; groupIndex++) {
-      dataStream.current.subscribe(updateDataForGroup(groupIndex));
-    }
+    groupsMetadata.forEach((_, groupIndex) => dataStream.current.subscribe(updateDataForGroup(groupIndex)));
 
     sensorsDataStream.init({
       message: ({ message }) => {

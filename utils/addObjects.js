@@ -6,5 +6,6 @@ export default (obj1, obj2) => {
       sum[key] = parseFloat(obj1[key]) + parseFloat(obj2[key]);
     }
   });
+
   return sum;
 };
