@@ -12,8 +12,8 @@ export default (groupsMetadata, sensorsDataStream, rollingWindow = 50) => {
   const dataStream = useRef(null);
   const [sensorsData, setSensorsData] = useState(Array(groupsMetadata.length).fill([]));
   const [totalProcessed, setTotalProcessed] = useState(0);
-
   const calculateAveragesFor = divideObjectValuesBy(groupsMetadata.length);
+
   const addRecordToArray = groupIndex => sensorRecord => {
     const newGroupData = sensorsData[groupIndex].slice(0);
     newGroupData.push(sensorRecord);
@@ -26,6 +26,7 @@ export default (groupsMetadata, sensorsDataStream, rollingWindow = 50) => {
       return currentState;
     });
   };
+
   const updateDataForGroup = groupIndex => updateGroup(groupsMetadata, groupIndex, addRecordToArray);
 
   useEffect(() => {

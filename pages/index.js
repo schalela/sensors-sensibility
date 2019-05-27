@@ -7,7 +7,7 @@ import GlobalStyle from '../global-style.js';
 import groupsMetadata from '../data/metadata';
 import sensorTypes from '../data/sensor-types';
 import useSensorsData from '../hooks/useSensorsData';
-import sensorsDataStream from '../data/sensors-data';
+import sensorsDataStream from '../data/sensors-stream';
 
 export default () => {
   const [sensorResults, allGroupsAvg] = useSensorsData(groupsMetadata, sensorsDataStream);
