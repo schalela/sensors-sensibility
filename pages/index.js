@@ -1,23 +1,36 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useQuery } from '@apollo/react-hooks';
+import get from 'lodash.get';
+import gql from 'graphql-tag';
 
 import MapWithData from '../components/map-with-data';
 import Gauge from '../components/gauge';
 import Totals from '../components/totals';
 import GlobalStyle from '../global-style.js';
-import groupsMetadata from '../data/metadata';
 import sensorTypes from '../data/sensor-types';
-import useSensorsData from '../hooks/useSensorsData';
-import sensorsDataStream from '../data/sensors-stream';
+
+const SENSOR_DATA = gql`
+  {
+    getIotPocDeviceTable(id: "iot-poc-device") {
+      id
+      payload
+    }
+  }
+`;
 
 export default () => {
-  const [sensorResults, allGroupsAvg] = useSensorsData(groupsMetadata, sensorsDataStream);
+  const { data } = useQuery(SENSOR_DATA, {
+    pollInterval: 1000
+  });
+  const payload = JSON.parse(get(data, 'getIotPocDeviceTable.payload', '{}'));
+  const sensorData = get(payload, 'state.reported');
 
-  const getValueFor = sensorType => !allGroupsAvg[sensorType] ? 0 : Number(allGroupsAvg[sensorType].toFixed(1));
+  const getValueFor = sensorType => get(sensorData, `${sensorType}`, 0).toFixed(1);
 
   return (
     <>
       <GlobalStyle />
-      <MapWithData sensorData={sensorResults}>
+      <MapWithData sensorData={[sensorData]}>
         <Totals>
           {sensorTypes.map((sensor, i) => (
             <Gauge

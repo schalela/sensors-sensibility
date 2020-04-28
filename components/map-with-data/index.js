@@ -36,7 +36,7 @@ const MapContainer = ({ google, sensorData = [], children }) => {
   const [selectedMarker, setSelectedMarker] = useState('');
   const { groupIndex } = selectedMarker;
 
-  const getValueFor = sensorType => get(sensorData, `[${groupIndex}].totals.${sensorType}`, 0).toFixed(1);
+  const getValueFor = sensorType => get(sensorData, `[${groupIndex}].${sensorType}`, 0).toFixed(1);
 
   return (
     <Map
@@ -44,18 +44,18 @@ const MapContainer = ({ google, sensorData = [], children }) => {
       mapTypeControl={false}
       streetViewControl={false}
       initialCenter={{
-        lat: -23,
-        lng: 133
+        lat: 37,
+        lng: -121
       }}
       google={google}
       zoom={4}>
-      {sensorData.map(({ metadata: { name, position } }, groupIndex) => (
+      {sensorData.map((_, groupIndex) => (
         <Marker
           key={`marker-${groupIndex}`}
           icon={'/static/sensor.png'}
           onClick={({ name }, marker) => setSelectedMarker({ marker, name, groupIndex })}
-          name={name}
-          position={position}
+          name={'Ed\'s House'}
+          position={{ lat: 37.253160, lng: -121.928425 }}
         />
       ))}
       <InfoWindow
