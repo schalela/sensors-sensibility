@@ -20,7 +20,7 @@ const SENSOR_DATA = gql`
 
 export default () => {
   const { data } = useQuery(SENSOR_DATA, {
-    pollInterval: 1000
+    pollInterval: 2000
   });
   const payload = JSON.parse(get(data, 'getIotPocDeviceTable.payload', '{}'));
   const sensorData = get(payload, 'state.reported');
