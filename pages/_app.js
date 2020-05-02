@@ -12,7 +12,7 @@ const client = new ApolloClient({
     uri: 'https://jtzg6hkmt5gyhh7pxuyrhmovqm.appsync-api.us-west-2.amazonaws.com/graphql', // Server URL (must be absolute)
     headers: {
       'x-api-key': 'da2-gqnkhbr4p5cfddftowvrafy4ke'
-    }, // Additional fetch() options like `credentials` or `headers`
+    }, 
     fetch,
   }),
   cache: new InMemoryCache(),
